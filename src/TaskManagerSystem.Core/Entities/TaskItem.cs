@@ -12,9 +12,6 @@ public class TaskItem
 
     public void Add(string title, string? description, User user)
     {
-        if (string.IsNullOrWhiteSpace(title))
-            throw new ArgumentException("Title cannot be empty.", nameof(title));
-
         Title = title;
         Description = description;
         User = user;
@@ -22,9 +19,6 @@ public class TaskItem
 
     public void Update(string title, string? description)
     {
-        if (string.IsNullOrWhiteSpace(title))
-            throw new ArgumentException("Title cannot be empty.", nameof(title));
-
         Title = title;
         Description = description;
         DueDate = DateTime.UtcNow;
