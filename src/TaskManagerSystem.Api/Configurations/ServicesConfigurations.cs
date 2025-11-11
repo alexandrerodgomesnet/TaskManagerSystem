@@ -1,3 +1,6 @@
+using FluentValidation;
+using TaskManagerSystem.Core;
+
 namespace TaskManagerSystem.Api.Configurations;
 
 public static class ServicesConfigurations
@@ -11,7 +14,16 @@ public static class ServicesConfigurations
             config.Title = "TaskManagerSystemAPI v1";
             config.Version = "v1";
         });
-        
+
+        builder.Services.AddValidatorsFromAssemblies([
+            typeof(Program).Assembly, 
+            typeof(CoreLayer).Assembly
+        ], includeInternalTypes: true);
+
+        // builder.Services.AddFluentValidationAutoValidation()
+        //     .AddValidatorsFromAssembly();
+                //.AddValidatorsFromAssemblyContaining<UserValidator>();
+
         // builder.Services.AddSwaggerGen(c =>
         // {
         //     c.SwaggerDoc("v1",
