@@ -3,15 +3,15 @@ using TaskManagerSystem.Core.Entities;
 
 namespace TaskManagerSystem.Infrastructure.Persistence.Context;
 
-public class TaskManagerSystemDb : DbContext
+public class TaskManagerContext : DbContext
 {
-    public TaskManagerSystemDb(DbContextOptions<TaskManagerSystemDb> options)
+    public TaskManagerContext(DbContextOptions<TaskManagerContext> options)
         : base(options) { }
 
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TaskManagerSystemDb).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(TaskManagerContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 
