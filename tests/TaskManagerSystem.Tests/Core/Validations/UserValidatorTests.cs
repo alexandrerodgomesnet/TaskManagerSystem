@@ -1,5 +1,6 @@
 using Bogus;
 using FluentAssertions;
+using FluentValidation.TestHelper;
 using TaskManagerSystem.Core.Entities;
 using TaskManagerSystem.Core.Validations;
 
@@ -23,10 +24,10 @@ public class UserValidatorTests
         var user = new User(_faker.Person.FullName, _faker.Internet.Email());
 
         // Act
-        var result = _validator.Validate(user);
+        var result = _validator.TestValidate(user);
 
         // Assert
-        result.IsValid.Should().BeTrue();
+        result.ShouldNotHaveAnyValidationErrors();
     }
 
     [Theory(DisplayName = "Deve invalidar usuário com nome ou e-mail inválidos")]
@@ -41,9 +42,9 @@ public class UserValidatorTests
         var user = new User(nome ?? string.Empty, email ?? string.Empty);
 
         // Act
-        var result = _validator.Validate(user);
+        var result = _validator.TestValidate(user);
 
         // Assert
-        result.IsValid.Should().BeFalse();
+        result.ShouldHaveValidationErrors();
     }
 }
