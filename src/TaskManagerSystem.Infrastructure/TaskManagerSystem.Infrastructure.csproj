@@ -10,5 +10,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TaskManagerSystem.Core\TaskManagerSystem.Core.csproj" />
+    <ProjectReference Include="..\TaskManagerSystem.Application\TaskManagerSystem.Application.csproj" />
   </ItemGroup>
 </Project>
