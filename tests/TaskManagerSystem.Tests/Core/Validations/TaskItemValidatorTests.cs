@@ -66,7 +66,7 @@ public class TaskItemValidatorTests
         var task = new TaskItem
         {
             Title = _faker.Lorem.Sentence(3),
-            User = null
+            User = null!
         };
 
         // Act
