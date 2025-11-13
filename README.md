@@ -99,8 +99,8 @@ dotnet test
 **Alexandre Rodrigues Gomes**
 ```
 Desenvolvedor .NET | C# | APIs REST | Clean Architecture
-```
+
 📧 [alexandrerodgomes@hotmail.com]
 🌐 www.linkedin.com/in/alexandre-rodrigues-gomes-55a366161
-
+```
 ---
