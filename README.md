@@ -16,6 +16,7 @@ Sistema de gerenciamento de tarefas.
 
 ## 🧱 Estrutura do Projeto
 
+```
 TaskManagerSystem/
 │
 ├── TaskManagerSystem.sln
@@ -28,16 +29,19 @@ TaskManagerSystem/
 │
 └── tests/
 └── TaskManagerSystem.Tests/ # Testes unitários e de integração
+```
 
 ---
 
 ## 🧠 Funcionalidades Implementadas
 # 📌 Gerenciamento de Tarefas
+```
 Método	        Endpoint	                    Descrição
 POST	        /api/tasks	                    Cria uma nova tarefa
 GET	            /api/tasks/{userId}	            Lista todas as tarefas de um usuário
 PUT	            /api/tasks/{id}/complete	    Marca uma tarefa como concluída
 DELETE	        /api/tasks/{id}	                Remove uma tarefa existente
+```
 
 ---
 
@@ -93,7 +97,9 @@ dotnet test
 ## 👨‍💻 Autor
 
 **Alexandre Rodrigues Gomes**
-**Desenvolvedor .NET | C# | APIs REST | Clean Architecture**
+```
+Desenvolvedor .NET | C# | APIs REST | Clean Architecture
+```
 📧 [alexandrerodgomes@hotmail.com]
 🌐 www.linkedin.com/in/alexandre-rodrigues-gomes-55a366161
 
