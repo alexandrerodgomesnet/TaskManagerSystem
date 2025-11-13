@@ -3,12 +3,10 @@ using TaskManagerSystem.Infrastructure.Persistence.Context;
 
 namespace TaskManagerSystem.Infrastructure.Repositories;
 
-public class UnitOfWork(TaskManagerContext context, ITaskItemRepository taskItemRepository,
-    IUserRepository userRepository) : IUnitOfWork
+public class UnitOfWork(TaskManagerContext context, ITaskItemRepository taskItemRepository) : IUnitOfWork
 {
     private readonly TaskManagerContext _context = context;
     public ITaskItemRepository TaskItems { get; } = taskItemRepository;
-    public IUserRepository Users { get; } = userRepository;
 
     public async Task<bool> CommitAsync(CancellationToken cancellationToken)
         => await _context.SaveChangesAsync(cancellationToken) == 1;

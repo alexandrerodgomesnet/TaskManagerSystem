@@ -10,24 +10,25 @@ public class TaskItemRepository(TaskManagerContext context)
     : RepositoryBase<TaskItem>(context), ITaskItemRepository
 {
 
-    public async Task<IEnumerable<TaskItem>> GetIsCompletedAsync()
+    public async Task<IEnumerable<TaskItem>> ListTasksTasksByUser(int userId)
     {
-        var spec = new TaskItemCompletedSpecification();
-        var tarefas = await FindAsync(spec);
+        var spec = new ListTasksByUserIdSpecification(userId);
+        var taskItems = await FindAsync(spec)
+            ?? throw new KeyNotFoundException("List Tasks by user not found.");        
 
-        return tarefas;
+        return taskItems;
     }
 
     public async Task MarkAsCompleted(Guid id)
     {
-        var spec = new TaskItemNotCompletedSpecification(id);
-        var tarefas = await FindAsync(spec);
+        var spec = new TaskNotCompletedSpecification(id);
+        var taskItems = await FindAsync(spec);
 
-        var tarefa = tarefas.FirstOrDefault()
-            ?? throw new KeyNotFoundException("Task not found.");
+        var taskItem = taskItems.FirstOrDefault()
+            ?? throw new KeyNotFoundException("Task item not found.");
             
-        tarefa!.MarkAsCompleted();
+        taskItem!.MarkAsCompleted();
 
-        await UpdateAsync(tarefa);
+        await UpdateAsync(taskItem);
     }
 }

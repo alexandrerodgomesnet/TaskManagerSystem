@@ -5,6 +5,6 @@ namespace TaskManagerSystem.Application.Interfaces.Repositories;
 
 public interface ITaskItemRepository : IRepositoryBase<TaskItem>
 {
-    Task<IEnumerable<TaskItem>> GetIsCompletedAsync();
+    Task<IEnumerable<TaskItem>> ListTasksTasksByUser(int userId);
     Task MarkAsCompleted(Guid id);
 }

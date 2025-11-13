@@ -4,25 +4,11 @@ public class TaskItem
 {
     public Guid Id { get; init; } = Guid.NewGuid();
     public string Title { get; set; } = string.Empty;
-    public string? Description { get; set; }= string.Empty;
+    public string Description { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime? DueDate { get; set; }
-    public User User { get; set; } = null!;
+    public DateTime DueDate { get; set; }
+    public int UserId { get; set; }
     public bool IsCompleted { get; set; } = false;
-
-    public void Add(string title, string? description, User user)
-    {
-        Title = title;
-        Description = description;
-        User = user;
-    }
-
-    public void Update(string title, string? description)
-    {
-        Title = title;
-        Description = description;
-        DueDate = DateTime.UtcNow;
-    }
 
     public void MarkAsCompleted() => IsCompleted = true;
 }

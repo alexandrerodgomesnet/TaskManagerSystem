@@ -8,13 +8,12 @@ public class TaskManagerContext : DbContext
     public TaskManagerContext(DbContextOptions<TaskManagerContext> options)
         : base(options) { }
 
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(TaskManagerContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
-
-    public DbSet<User> Users => Set<User>();
+    
     public DbSet<TaskItem> TaskItems => Set<TaskItem>();
 }

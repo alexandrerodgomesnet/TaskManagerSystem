@@ -27,16 +27,12 @@ public class TaskItemConfiguration : IEntityTypeConfiguration<TaskItem>
            .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
         builder.Property(t => t.DueDate)
-            .IsRequired(false);
+            .IsRequired();
+
+        builder.Property(t => t.UserId)
+            .IsRequired();
 
         builder.Property(t => t.IsCompleted)
             .HasDefaultValue(false);
-
-        // Relacionamento com User (N:1)
-        builder.HasOne(t => t.User)
-            .WithMany()
-            .HasForeignKey("UserId")
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }
