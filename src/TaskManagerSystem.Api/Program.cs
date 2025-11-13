@@ -1,12 +1,11 @@
 using TaskManagerSystem.Api.Configurations;
+using TaskManagerSystem.Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureServices();
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseOpenApi();
@@ -18,6 +17,8 @@ if (app.Environment.IsDevelopment())
         config.DocExpansion = "list";
     });
 }
+
+app.TaskItemsRoutes();
 
 app.UseHttpsRedirection();
 
