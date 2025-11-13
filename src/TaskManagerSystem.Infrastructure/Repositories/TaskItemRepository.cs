@@ -13,8 +13,10 @@ public class TaskItemRepository(TaskManagerContext context)
     public async Task<IEnumerable<TaskItem>> ListTasksTasksByUser(int userId)
     {
         var spec = new ListTasksByUserIdSpecification(userId);
-        var taskItems = await FindAsync(spec)
-            ?? throw new KeyNotFoundException("List Tasks by user not found.");        
+        var taskItems = await FindAsync(spec);
+
+        if(taskItems == null || !taskItems.Any())
+            throw new KeyNotFoundException("List Tasks by user not found.");        
 
         return taskItems;
     }

@@ -7,67 +7,93 @@ namespace TaskManagerSystem.Tests.Core.Entities;
 public class TaskItemTests
 {
     private readonly Faker _faker;
-
     public TaskItemTests()
     {
         _faker = new Faker("pt_BR");
     }
 
-    [Fact(DisplayName = "Deve criar uma tarefa válida com título, descrição e usuário")]
-    public void Deve_Criar_Tarefa_Valida()
+    [Fact(DisplayName = "Deve criar uma TaskItem válida com dados padrão")]
+    public void Deve_Criar_TaskItem_Valida()
     {
         // Arrange
-        // var user = new User(_faker.Person.FullName, _faker.Internet.Email());
-        // var title = _faker.Lorem.Sentence(3);
-        // var description = _faker.Lorem.Paragraph();
+        var title = _faker.Lorem.Sentence(3);
+        var description = _faker.Lorem.Paragraph();
+        var userId = _faker.Random.Int(1, 1000);
+        var dueDate = DateTime.UtcNow.AddDays(3);
 
-        // var task = new TaskItem();
+        // Act
+        var task = new TaskItem
+        {
+            Title = title,
+            Description = description,
+            UserId = userId,
+            DueDate = dueDate
+        };
 
-        // // Act
-        // task.Add(title, description, user);
-
-        // // Assert
-        // task.Title.Should().Be(title);
-        // task.Description.Should().Be(description);
-        // task.User.Should().Be(user);
-        // task.IsCompleted.Should().BeFalse();
-        // task.Id.Should().NotBeEmpty();
-        // task.CreatedAt.Should().BeBefore(DateTime.UtcNow.AddSeconds(1));
+        // Assert
+        task.Should().NotBeNull();
+        task.Id.Should().NotBeEmpty();
+        task.Title.Should().Be(title);
+        task.Description.Should().Be(description);
+        task.UserId.Should().Be(userId);
+        task.IsCompleted.Should().BeFalse();
+        task.CreatedAt.Should().BeBefore(DateTime.UtcNow.AddSeconds(1));
+        task.DueDate.Should().BeAfter(task.CreatedAt);
     }
 
-    [Fact(DisplayName = "Deve atualizar título e descrição e definir DueDate")]
-    public void Deve_Atualizar_Tarefa()
+    [Fact(DisplayName = "Deve permitir marcar a tarefa como concluída")]
+    public void Deve_Marcar_Como_Concluida()
     {
         // Arrange
-        // var user = new User(_faker.Person.FullName, _faker.Internet.Email());
-        // var task = new TaskItem();
-        // task.Add("Tarefa inicial", "Descrição inicial", user);
+        var task = new TaskItem
+        {
+            Title = _faker.Lorem.Sentence(),
+            Description = _faker.Lorem.Paragraph(),
+            UserId = _faker.Random.Int(1, 100)
+        };
 
-        // var novoTitulo = "Tarefa atualizada";
-        // var novaDescricao = "Descrição atualizada";
+        // Act
+        task.MarkAsCompleted();
 
-        // // Act
-        // task.Update(novoTitulo, novaDescricao);
-
-        // // Assert
-        // task.Title.Should().Be(novoTitulo);
-        // task.Description.Should().Be(novaDescricao);
-        // task.DueDate.Should().NotBeNull();
-        // task.DueDate.Should().BeAfter(task.CreatedAt);
+        // Assert
+        task.IsCompleted.Should().BeTrue();
     }
 
-    [Fact(DisplayName = "Deve marcar a tarefa como concluída")]
-    public void Deve_Marcar_Tarefa_Como_Concluida()
+    [Fact(DisplayName = "Deve atualizar os campos corretamente")]
+    public void Deve_Atualizar_Campos()
     {
         // Arrange
-        // var user = new User(_faker.Person.FullName, _faker.Internet.Email());
-        // var task = new TaskItem();
-        // task.Add("Tarefa", "Descrição", user);
+        var task = new TaskItem
+        {
+            Title = "Título antigo",
+            Description = "Descrição antiga",
+            UserId = 1,
+            DueDate = DateTime.UtcNow.AddDays(2)
+        };
 
-        // // Act
-        // task.MarkAsCompleted();
+        var novoTitulo = "Novo título";
+        var novaDescricao = "Nova descrição";
+        var novaData = DateTime.UtcNow.AddDays(5);
 
-        // // Assert
-        // task.IsCompleted.Should().BeTrue();
+        // Act
+        task.Title = novoTitulo;
+        task.Description = novaDescricao;
+        task.DueDate = novaData;
+
+        // Assert
+        task.Title.Should().Be(novoTitulo);
+        task.Description.Should().Be(novaDescricao);
+        task.DueDate.Should().Be(novaData);
+    }
+
+    [Fact(DisplayName = "Deve gerar IDs únicos para diferentes instâncias")]
+    public void Deve_Gerar_IDs_Unicos()
+    {
+        // Arrange & Act
+        var task1 = new TaskItem { Title = "Tarefa 1" };
+        var task2 = new TaskItem { Title = "Tarefa 2" };
+
+        // Assert
+        task1.Id.Should().NotBe(task2.Id);
     }
 }

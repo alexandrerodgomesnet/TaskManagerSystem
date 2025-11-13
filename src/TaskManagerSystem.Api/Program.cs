@@ -23,3 +23,5 @@ app.TaskItemsRoutes();
 app.UseHttpsRedirection();
 
 app.Run();
+
+public partial class Program { }
