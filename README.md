@@ -24,8 +24,8 @@ TaskManagerSystem/
 ├── src/
 │ ├── TaskManagerSystem.Api/ # Camada de apresentação (endpoints)
 │ ├── TaskManagerSystem.Application/ # Regras de negócio e DTOs
-│ ├── TaskManagerSystem.Domain/ # Entidades e contratos
-│ └── TaskManagerSystem.Infra/ # Persistência e repositórios (EF Core)
+│ ├── TaskManagerSystem.Core/ # Entidades e contratos
+│ └── TaskManagerSystem.Infrastructure/ # Persistência e repositórios (EF Core)
 │
 └── tests/
 └── TaskManagerSystem.Tests/ # Testes unitários e de integração
